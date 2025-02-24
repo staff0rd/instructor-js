@@ -194,7 +194,7 @@ class Instructor<C> {
 
       try {
         const responseJson = parsedCompletion.json ?? parsedCompletion
-        const data = JSON.parse(responseJson) as z.infer<T> & {
+        const data = (typeof responseJson === 'string' ? JSON.parse(responseJson) : responseJson) as z.infer<T> & {
           _meta?: CompletionMeta
           thinking?: string
         }
